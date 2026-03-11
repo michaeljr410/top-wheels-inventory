@@ -5,7 +5,7 @@ export type DealType =
   | 'wrap'
   | 'cash-deal';
 
-export type VehicleCategory = 'boats' | 'vehicles' | 'rvs';
+export type VehicleCategory = 'boats' | 'vehicles' | 'rvs' | 'equipment';
 
 export interface Vehicle {
   id: string;
@@ -69,10 +69,12 @@ export const CATEGORY_LABELS: Record<VehicleCategory, string> = {
   boats: 'Boats',
   vehicles: 'Trucks & Cars',
   rvs: 'RVs & Trailers',
+  equipment: 'Heavy Equipment',
 };
 
 export const CATEGORY_ICONS: Record<VehicleCategory, string> = {
   boats: '⚓',
   vehicles: '🚗',
   rvs: '🚐',
+  equipment: '🚜',
 };

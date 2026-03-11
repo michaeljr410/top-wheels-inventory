@@ -14,6 +14,7 @@ const CATEGORIES: Array<{ key: VehicleCategory | 'all'; label: string; icon: str
   { key: 'boats', label: CATEGORY_LABELS.boats, icon: CATEGORY_ICONS.boats },
   { key: 'vehicles', label: CATEGORY_LABELS.vehicles, icon: CATEGORY_ICONS.vehicles },
   { key: 'rvs', label: CATEGORY_LABELS.rvs, icon: CATEGORY_ICONS.rvs },
+  { key: 'equipment', label: CATEGORY_LABELS.equipment, icon: CATEGORY_ICONS.equipment },
 ];
 
 export const Inventory = ({ onGetStarted }: InventoryProps) => {
@@ -30,6 +31,7 @@ export const Inventory = ({ onGetStarted }: InventoryProps) => {
     boats: availableVehicles.filter(v => v.category === 'boats').length,
     vehicles: availableVehicles.filter(v => v.category === 'vehicles').length,
     rvs: availableVehicles.filter(v => v.category === 'rvs').length,
+    equipment: availableVehicles.filter(v => v.category === 'equipment').length,
   };
 
   return (

@@ -79,6 +79,7 @@ export const Hero = () => {
           <StatBlock value={`${stats.boatCount}`} label="Boats" />
           <StatBlock value={`${stats.vehicleCount}`} label="Trucks & Cars" />
           <StatBlock value={`${stats.rvCount}`} label="RVs & Trailers" />
+          {stats.equipmentCount > 0 && <StatBlock value={`${stats.equipmentCount}`} label="Equipment" />}
           <StatBlock value={`${formatCurrency(stats.lowestEntryFee)}`} label="Lowest Entry" />
         </motion.div>
       </div>
