@@ -5,6 +5,8 @@ export type DealType =
   | 'wrap'
   | 'cash-deal';
 
+export type VehicleCategory = 'boats' | 'vehicles' | 'rvs';
+
 export interface Vehicle {
   id: string;
   year: number;
@@ -13,7 +15,9 @@ export interface Vehicle {
   trim?: string;
   color?: string;
   mileage?: number;
+  hours?: number; // For boats
   vin?: string;
+  category: VehicleCategory;
 
   // Deal terms
   entryFee: number;
@@ -21,7 +25,12 @@ export interface Vehicle {
   monthsLeft: number;
   interestRate: number;
   loanBalance?: number;
+  purchasePrice?: number;
   dealType: DealType;
+  gap?: boolean;
+  balloonPayment?: number;
+  paymentNote?: string; // e.g. "→ $1,035 @ month 58"
+  sellerContribution?: string; // e.g. "$115/mo cost-share"
 
   // Location
   city: string;
@@ -29,6 +38,7 @@ export interface Vehicle {
 
   // Media
   photos: string[];
+  dropboxUrl?: string; // Link to full Dropbox photo gallery
 
   // Details
   highlights?: string[];
@@ -53,4 +63,16 @@ export const DEAL_TYPE_COLORS: Record<DealType, string> = {
   'lease-option': 'bg-amber-500/20 text-amber-400 border-amber-500/30',
   'wrap': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
   'cash-deal': 'bg-tw-white/10 text-tw-white border-tw-white/20',
+};
+
+export const CATEGORY_LABELS: Record<VehicleCategory, string> = {
+  boats: 'Boats',
+  vehicles: 'Trucks & Cars',
+  rvs: 'RVs & Trailers',
+};
+
+export const CATEGORY_ICONS: Record<VehicleCategory, string> = {
+  boats: '⚓',
+  vehicles: '🚗',
+  rvs: '🚐',
 };

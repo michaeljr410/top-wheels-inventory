@@ -47,7 +47,7 @@ export const Hero = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-[clamp(1.05rem,2vw,1.2rem)] text-tw-dim max-w-[640px] mb-6 leading-relaxed"
         >
-          Browse Mike Davis's current creative finance vehicle inventory.
+          Boats, trucks, RVs, luxury vehicles — all available through creative finance.
           No banks. No credit checks. Just deals that work.
         </motion.p>
 
@@ -58,7 +58,7 @@ export const Hero = () => {
           transition={{ duration: 0.6, delay: 0.35 }}
           className="inline-flex items-center gap-3 bg-dark-elevated/60 border border-dark-border px-5 py-3 mb-10 max-w-[640px]"
         >
-          <span className="text-cyan text-lg">&#9432;</span>
+          <span className="text-cyan text-lg shrink-0">&#9432;</span>
           <p className="text-sm text-tw-dim leading-relaxed">
             While{' '}
             <a href="https://sellfi.io" target="_blank" rel="noopener noreferrer" className="text-cyan hover:text-cyan-light transition-colors font-medium">
@@ -73,11 +73,13 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex gap-12 flex-wrap"
+          className="flex gap-8 sm:gap-12 flex-wrap"
         >
-          <StatBlock value={`${stats.totalAvailable}`} label="Vehicles Available" />
-          <StatBlock value={`${formatCurrency(stats.avgMonthlyPayment)}/mo`} label="Avg. Monthly Payment" />
-          <StatBlock value={`${formatCurrency(stats.lowestEntryFee)}`} label="Lowest Entry Fee" />
+          <StatBlock value={`${stats.totalAvailable}`} label="Total Available" />
+          <StatBlock value={`${stats.boatCount}`} label="Boats" />
+          <StatBlock value={`${stats.vehicleCount}`} label="Trucks & Cars" />
+          <StatBlock value={`${stats.rvCount}`} label="RVs & Trailers" />
+          <StatBlock value={`${formatCurrency(stats.lowestEntryFee)}`} label="Lowest Entry" />
         </motion.div>
       </div>
     </section>
@@ -85,9 +87,8 @@ export const Hero = () => {
 };
 
 const StatBlock = ({ value, label }: { value: string; label: string }) => (
-  <div className="relative pr-12 last:pr-0">
-    <div className="font-heading text-[2.6rem] text-cyan leading-none">{value}</div>
-    <div className="text-[0.72rem] text-tw-muted uppercase tracking-[0.1em] mt-1">{label}</div>
-    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-10 bg-dark-border last:hidden" />
+  <div>
+    <div className="font-heading text-[2rem] sm:text-[2.6rem] text-cyan leading-none">{value}</div>
+    <div className="text-[0.68rem] sm:text-[0.72rem] text-tw-muted uppercase tracking-[0.1em] mt-1">{label}</div>
   </div>
 );

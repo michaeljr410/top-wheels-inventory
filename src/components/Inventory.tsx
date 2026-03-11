@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { vehicles } from '@/data/vehicles';
-import type { Vehicle } from '@/data/types';
+import type { Vehicle, VehicleCategory } from '@/data/types';
+import { CATEGORY_LABELS, CATEGORY_ICONS } from '@/data/types';
 import { VehicleCard } from './VehicleCard';
 import { ScrollReveal } from './ScrollReveal';
 
@@ -7,15 +9,35 @@ interface InventoryProps {
   onGetStarted: (vehicle: Vehicle) => void;
 }
 
+const CATEGORIES: Array<{ key: VehicleCategory | 'all'; label: string; icon: string }> = [
+  { key: 'all', label: 'All', icon: '🔥' },
+  { key: 'boats', label: CATEGORY_LABELS.boats, icon: CATEGORY_ICONS.boats },
+  { key: 'vehicles', label: CATEGORY_LABELS.vehicles, icon: CATEGORY_ICONS.vehicles },
+  { key: 'rvs', label: CATEGORY_LABELS.rvs, icon: CATEGORY_ICONS.rvs },
+];
+
 export const Inventory = ({ onGetStarted }: InventoryProps) => {
+  const [activeCategory, setActiveCategory] = useState<VehicleCategory | 'all'>('all');
+
   const availableVehicles = vehicles.filter(v => v.isAvailable);
+  const filteredVehicles = activeCategory === 'all'
+    ? availableVehicles
+    : availableVehicles.filter(v => v.category === activeCategory);
+
+  // Count per category
+  const counts: Record<string, number> = {
+    all: availableVehicles.length,
+    boats: availableVehicles.filter(v => v.category === 'boats').length,
+    vehicles: availableVehicles.filter(v => v.category === 'vehicles').length,
+    rvs: availableVehicles.filter(v => v.category === 'rvs').length,
+  };
 
   return (
     <section id="inventory" className="py-20 md:py-28">
-      <div className="container mx-auto px-6 max-w-[1000px]">
+      <div className="container mx-auto px-6 max-w-[1100px]">
         {/* Section header */}
         <ScrollReveal>
-          <div className="mb-16">
+          <div className="mb-10">
             <div className="flex items-center gap-3 text-[0.68rem] tracking-[0.25em] uppercase text-cyan mb-4">
               <span className="w-8 h-px bg-cyan" />
               Available Now
@@ -24,16 +46,41 @@ export const Inventory = ({ onGetStarted }: InventoryProps) => {
               CURRENT INVENTORY
             </h2>
             <p className="text-[1.05rem] text-tw-dim max-w-[600px] leading-relaxed">
-              Every vehicle listed here is available for creative finance acquisition.
+              Boats, trucks, cars, RVs — all available for creative finance acquisition.
               Entry fees start low. Monthly payments you can actually handle.
               No bank approval needed.
             </p>
           </div>
         </ScrollReveal>
 
-        {/* Vehicle grid — vertical cascade */}
+        {/* Category tabs */}
+        <ScrollReveal delay={0.1}>
+          <div className="flex flex-wrap gap-2 mb-10">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.key}
+                onClick={() => setActiveCategory(cat.key)}
+                className={`inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all border ${
+                  activeCategory === cat.key
+                    ? 'bg-cyan/10 border-cyan/40 text-cyan'
+                    : 'bg-dark-elevated/40 border-dark-border text-tw-dim hover:text-tw-text hover:border-tw-muted/30'
+                }`}
+              >
+                <span>{cat.icon}</span>
+                <span>{cat.label}</span>
+                <span className={`ml-1 text-xs font-mono ${
+                  activeCategory === cat.key ? 'text-cyan/80' : 'text-tw-muted'
+                }`}>
+                  {counts[cat.key]}
+                </span>
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
+
+        {/* Vehicle grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {availableVehicles.map((vehicle, index) => (
+          {filteredVehicles.map((vehicle, index) => (
             <VehicleCard
               key={vehicle.id}
               vehicle={vehicle}
@@ -44,10 +91,10 @@ export const Inventory = ({ onGetStarted }: InventoryProps) => {
         </div>
 
         {/* Empty state */}
-        {availableVehicles.length === 0 && (
+        {filteredVehicles.length === 0 && (
           <div className="text-center py-20">
             <p className="text-tw-dim text-lg">
-              All vehicles have been claimed. Check back soon for new inventory.
+              No {activeCategory !== 'all' ? CATEGORY_LABELS[activeCategory].toLowerCase() : 'vehicles'} available right now. Check back soon.
             </p>
           </div>
         )}
