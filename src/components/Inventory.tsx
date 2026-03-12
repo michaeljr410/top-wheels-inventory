@@ -1,9 +1,35 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { vehicles } from '@/data/vehicles';
 import type { Vehicle, VehicleCategory } from '@/data/types';
 import { CATEGORY_LABELS, CATEGORY_ICONS } from '@/data/types';
 import { VehicleCard } from './VehicleCard';
 import { ScrollReveal } from './ScrollReveal';
+
+/** Deterministic shuffle with VW Atlas first, BMW 530i second */
+function shuffleInventory(items: Vehicle[]): Vehicle[] {
+  // Pull pinned vehicles out
+  const atlas = items.find(v => v.id === 'vehicle-7');    // VW Atlas
+  const bmw530 = items.find(v => v.id === 'vehicle-5');   // BMW 530i
+  const rest = items.filter(v => v.id !== 'vehicle-7' && v.id !== 'vehicle-5');
+
+  // Seeded shuffle (changes daily so it feels fresh but stays consistent per session)
+  const seed = new Date().toISOString().slice(0, 10);
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) hash = ((hash << 5) - hash + seed.charCodeAt(i)) | 0;
+  const shuffled = [...rest];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    hash = ((hash << 5) - hash + i) | 0;
+    const j = Math.abs(hash) % (i + 1);
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  // Pin at top
+  const result: Vehicle[] = [];
+  if (atlas) result.push(atlas);
+  if (bmw530) result.push(bmw530);
+  result.push(...shuffled);
+  return result;
+}
 
 interface InventoryProps {
   onGetStarted: (vehicle: Vehicle) => void;
@@ -11,8 +37,8 @@ interface InventoryProps {
 
 const CATEGORIES: Array<{ key: VehicleCategory | 'all'; label: string; icon: string }> = [
   { key: 'all', label: 'All', icon: '🔥' },
-  { key: 'boats', label: CATEGORY_LABELS.boats, icon: CATEGORY_ICONS.boats },
   { key: 'vehicles', label: CATEGORY_LABELS.vehicles, icon: CATEGORY_ICONS.vehicles },
+  { key: 'boats', label: CATEGORY_LABELS.boats, icon: CATEGORY_ICONS.boats },
   { key: 'rvs', label: CATEGORY_LABELS.rvs, icon: CATEGORY_ICONS.rvs },
   { key: 'equipment', label: CATEGORY_LABELS.equipment, icon: CATEGORY_ICONS.equipment },
 ];
@@ -21,8 +47,9 @@ export const Inventory = ({ onGetStarted }: InventoryProps) => {
   const [activeCategory, setActiveCategory] = useState<VehicleCategory | 'all'>('all');
 
   const availableVehicles = vehicles.filter(v => v.isAvailable);
+  const shuffledAll = useMemo(() => shuffleInventory(availableVehicles), [availableVehicles]);
   const filteredVehicles = activeCategory === 'all'
-    ? availableVehicles
+    ? shuffledAll
     : availableVehicles.filter(v => v.category === activeCategory);
 
   // Count per category

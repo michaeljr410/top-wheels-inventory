@@ -67,7 +67,7 @@ export const DEAL_TYPE_COLORS: Record<DealType, string> = {
 
 export const CATEGORY_LABELS: Record<VehicleCategory, string> = {
   boats: 'Boats',
-  vehicles: 'Trucks & Cars',
+  vehicles: 'Cars & Trucks',
   rvs: 'RVs & Trailers',
   equipment: 'Heavy Equipment',
 };

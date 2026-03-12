@@ -135,7 +135,7 @@ export const GetStartedModal = ({ vehicle, isOpen, onClose }: GetStartedModalPro
         dealType: DEAL_TYPE_LABELS[vehicle.dealType],
       };
 
-      // Fire both in parallel — don't block on either
+      // Fire all in parallel — don't block on any
       await Promise.allSettled([
         fetch('/api/send-email', {
           method: 'POST',
@@ -147,6 +147,14 @@ export const GetStartedModal = ({ vehicle, isOpen, onClose }: GetStartedModalPro
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         }),
+        // Send buyer a follow-up SMS from Mike's number via BlueBubbles
+        phone
+          ? fetch('/api/send-buyer-sms', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            })
+          : Promise.resolve(),
       ]);
 
       setSubmitted(true);
@@ -271,8 +279,10 @@ export const GetStartedModal = ({ vehicle, isOpen, onClose }: GetStartedModalPro
                       </div>
                       <div className="text-xs text-tw-dim leading-relaxed">
                         TOP Wheels vets all buyers to protect both parties. This includes a brief
-                        phone/video call, identity verification, and background check.
-                        I consent to this process.
+                        phone/video call and identity verification. After booking, you'll receive a
+                        second confirmation link from the <span className="text-cyan font-medium">SellFi Portal</span> where
+                        you'll securely upload verification documents.{' '}
+                        <span className="text-tw-text font-medium">Check your email (and spam folder)</span> for this link.
                       </div>
                     </div>
                   </label>
@@ -387,8 +397,16 @@ export const GetStartedModal = ({ vehicle, isOpen, onClose }: GetStartedModalPro
                   <h3 className="font-heading text-2xl tracking-wide">You're In.</h3>
                   <p className="text-sm text-tw-dim max-w-sm mx-auto leading-relaxed">
                     We'll be in touch shortly about the {vehicleTitle}.
-                    Check your email and phone for next steps.
                   </p>
+                  <div className="bg-cyan/5 border border-cyan/20 p-4 text-left max-w-sm mx-auto space-y-2">
+                    <p className="text-xs text-cyan font-semibold uppercase tracking-wider">Next Steps:</p>
+                    <ul className="text-xs text-tw-dim space-y-1.5 leading-relaxed">
+                      <li className="flex gap-2"><span className="text-cyan shrink-0">1.</span> Check your email for a verification link from the <span className="text-tw-text font-medium">SellFi Portal</span></li>
+                      <li className="flex gap-2"><span className="text-cyan shrink-0">2.</span> Upload your verification documents through the secure portal</li>
+                      <li className="flex gap-2"><span className="text-cyan shrink-0">3.</span> We'll reach out to schedule your vetting call</li>
+                    </ul>
+                    <p className="text-[0.65rem] text-tw-muted pt-1">⚠️ Check your spam/junk folder if you don't see it.</p>
+                  </div>
                   <button
                     onClick={onClose}
                     className="bg-cyan text-dark font-bold text-sm tracking-[0.06em] uppercase px-8 py-3 hover:bg-cyan-light transition-all"

@@ -341,7 +341,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Dallas',
     state: 'TX',
-    photos: ['/vehicles/vehicle-7/placeholder.jpg'],
+    photos: ['https://images.unsplash.com/photo-1606611013016-969c19ba27a5?w=800&h=500&fit=crop'],
     highlights: [
       'Clean / Well-Maintained',
       'SE with Technology package',
@@ -371,7 +371,7 @@ export const vehicles: Vehicle[] = [
     sellerContribution: 'Seller contributes $100/mo — actual payment is $595, your cost is $495',
     city: 'Ennis',
     state: 'TX',
-    photos: ['/vehicles/vehicle-8/placeholder.jpg'],
+    photos: ['https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=800&h=500&fit=crop'],
     highlights: [
       'Clean / Well-Maintained',
       'Seller contributes $100/mo toward payment',
@@ -586,7 +586,7 @@ export const vehicles: Vehicle[] = [
     sellerContribution: 'Seller contributes $32,616 over time — reducing your monthly cost',
     city: 'Loomis',
     state: 'CA',
-    photos: localPhotos('rv-5', 15),
+    photos: localPhotos('rv-5', 17),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/b7ohrqnn2i7savv87vis9/AI0c3uWcULQFGzulkm1xtoE?rlkey=hhwqgw5h3wmmijddumnbag5mo&st=yxuw8zbl&dl=0',
     highlights: [
       'Spacious toy hauler',
@@ -739,7 +739,7 @@ export const vehicles: Vehicle[] = [
     paymentNote: 'Year 1: $1,000/mo — then $25,000/year annually (due every March)',
     city: 'Lee County',
     state: 'GA',
-    photos: localPhotos('equipment-1', 20),
+    photos: localPhotos('equipment-1', 21),
     highlights: [
       'Tractor / Heavy Equipment',
       'Good condition — 5,500 hours',
