@@ -6,6 +6,13 @@ import type { Vehicle } from './types';
 // Categories: Boats (4), Trucks & Cars (10), RVs & Trailers (9), Heavy Equipment (1)
 // ==========================================================
 
+/** Generate local photo paths: /vehicles/{id}/01.jpg, /vehicles/{id}/02.jpg, ... */
+function localPhotos(id: string, count: number): string[] {
+  return Array.from({ length: count }, (_, i) =>
+    `/vehicles/${id}/${String(i + 1).padStart(2, '0')}.jpg`
+  );
+}
+
 export const vehicles: Vehicle[] = [
   // ===============================
   //  BOATS
@@ -26,9 +33,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Destin',
     state: 'FL',
-    photos: [
-      'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('boat-1', 3),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/hesej34f512eh3ccgtwoo/AP4LJQBt_NagviUQBfFZ5Ko?rlkey=aozlvu8ksldo88nsev516undy&st=abn1bk9l&dl=0',
     highlights: [
       'Custom-painted boat-show build',
@@ -58,9 +63,7 @@ export const vehicles: Vehicle[] = [
     paymentNote: 'Drops to $1,035/mo at month 58',
     city: 'Destin',
     state: 'FL',
-    photos: [
-      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('boat-2', 9),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/pmuteb7leldcf1cuqjfpr/AJh8OR7bMK0KueMsbEl4t_o?rlkey=occb7ymcpgswuufm8oxfb9bnu&st=3llux8cx&dl=0',
     highlights: [
       'Brand-new 2026 custom factory build',
@@ -90,9 +93,7 @@ export const vehicles: Vehicle[] = [
     balloonPayment: 3000,
     city: 'Poplar Bluff',
     state: 'MO',
-    photos: [
-      'https://images.unsplash.com/photo-1622885911737-64d105be8562?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('boat-3', 25),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/dv7px495nlpi845begum9/AKLrWE06d-MTp29vOMRmwSA?rlkey=cl80gnpf6fsensy3ysrmykjna&st=ot0w84cx&dl=0',
     highlights: [
       'Sea-Doo 300 HP RXP power plant',
@@ -122,9 +123,7 @@ export const vehicles: Vehicle[] = [
     paymentNote: 'Drops to $909/mo at month 28',
     city: 'Poplar Bluff',
     state: 'MO',
-    photos: [
-      'https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('boat-4', 80),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/m1lzw69rkqvsf7lg2afm6/ANyBzzTNsgKS9FCg_ZNMITA?rlkey=87zoy8e5p7g8ui1rl8h9vazf7&st=nh8rik4n&dl=0',
     highlights: [
       'Yamaha FX SVHO engine',
@@ -159,9 +158,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Poplar Bluff',
     state: 'MO',
-    photos: [
-      'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('vehicle-1', 90),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/xrb3khkwzrr6heu59bh0j/AOeIeQoIO8zjgoAeW8m_ZDI?rlkey=xacnm89b1myxg7agsig4tanid&st=f0l64ep6&dl=0',
     highlights: [
       '6.7L Cummins Turbo Diesel',
@@ -192,9 +189,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Destin',
     state: 'FL',
-    photos: [
-      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('vehicle-2', 39),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/vna486yt7zch5yw6rr7z7/ABtV9VLnkr0ErdTqxuy4Z8Y?rlkey=v7ywt66kluzp2l8hpp1nfus2c&st=n2hvcwma&dl=0',
     highlights: [
       'Hard-loaded Turbo S with all the goodies',
@@ -224,9 +219,7 @@ export const vehicles: Vehicle[] = [
     balloonPayment: 19000,
     city: 'Poplar Bluff',
     state: 'MO',
-    photos: [
-      'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('vehicle-3', 127),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/1x340ns0j08aluglqg2bx/AJgteDgcyIKTafEIdOwT6js?rlkey=446pzwie6ee7y8dfs0k36qf75&st=x2id0trr&dl=0',
     highlights: [
       '707 HP Hellcat 6.2L supercharged V8',
@@ -258,9 +251,7 @@ export const vehicles: Vehicle[] = [
     gap: true,
     city: 'Frederick',
     state: 'MD',
-    photos: [
-      'https://images.unsplash.com/photo-1621361365424-06f0e1eb5c49?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('vehicle-4', 5),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/zn1fz0ofi9ny7kbc0uyuj/ABqieq7Pj0v0Qrm1kKcOMqQ?rlkey=3ypz30o50988id8lq48tzylhz&st=evoztk27&dl=0',
     highlights: [
       'All-electric powertrain — lightning-fast acceleration',
@@ -292,9 +283,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Phoenix',
     state: 'AZ',
-    photos: [
-      'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('vehicle-5', 8),
     highlights: [
       'Clean / Well-Maintained',
       'M Package styling & performance',
@@ -323,9 +312,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Dallas',
     state: 'TX',
-    photos: [
-      'https://images.unsplash.com/photo-1556189250-72ba954cfc2b?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('vehicle-6', 13),
     highlights: [
       'Clean / Well-Maintained',
       '2025 model — nearly brand new',
@@ -354,9 +341,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Dallas',
     state: 'TX',
-    photos: [
-      'https://images.unsplash.com/photo-1606611013016-969c19ba27a5?w=800&h=500&fit=crop',
-    ],
+    photos: ['/vehicles/vehicle-7/placeholder.jpg'],
     highlights: [
       'Clean / Well-Maintained',
       'SE with Technology package',
@@ -386,9 +371,7 @@ export const vehicles: Vehicle[] = [
     sellerContribution: 'Seller contributes $100/mo — actual payment is $595, your cost is $495',
     city: 'Ennis',
     state: 'TX',
-    photos: [
-      'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=800&h=500&fit=crop',
-    ],
+    photos: ['/vehicles/vehicle-8/placeholder.jpg'],
     highlights: [
       'Clean / Well-Maintained',
       'Seller contributes $100/mo toward payment',
@@ -417,9 +400,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Nashville',
     state: 'TN',
-    photos: [
-      'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('vehicle-9', 25),
     highlights: [
       'Excellent condition',
       '2025 model — practically new',
@@ -449,9 +430,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Las Vegas',
     state: 'NV',
-    photos: [
-      'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('vehicle-10', 58),
     highlights: [
       'ZL1 1LE — track-ready supercharged beast',
       'Good condition',
@@ -485,9 +464,7 @@ export const vehicles: Vehicle[] = [
     gap: true,
     city: 'Jamesport',
     state: 'MO',
-    photos: [
-      'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-1', 45),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/do6yxu4efmle29g1ruhxw/ABq4lkL3mAa9HuTOo4PV8lI?rlkey=h5bse11rykbz4hjq4z02r0fkc&st=vg7pk30k&dl=0',
     highlights: [
       'Class C motorhome',
@@ -517,9 +494,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Ohio',
     state: 'OH',
-    photos: [
-      'https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-2', 8),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/6ap8yua1c5t7fyzrsq1xb/AJNDQXWb7qfu5uWDnAScbLk?rlkey=rou35irdlorx03nh90zptx6ns&st=vn4y6g3k&dl=0',
     highlights: [
       'Luxury 5th wheel in pristine shape',
@@ -550,9 +525,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Keller',
     state: 'TX',
-    photos: [
-      'https://images.unsplash.com/photo-1543922596-b3f04be5b6a7?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-3', 15),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/cb9lf4ozcmy9kg58oc17s/ANr9kbjVWdAphTncGqU9ZdM?rlkey=jrsgxlf8vzyo2k2imfen8r3tz&st=vlvbydgj&dl=0',
     highlights: [
       '28ft Class A motorhome — sleeps 4',
@@ -583,9 +556,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Anaheim',
     state: 'CA',
-    photos: [
-      'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-4', 17),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/bpe8ztrauhy9eqrtixo01/AHou3K1pXiyexb2IWTjwx6s?rlkey=bb202j58v4e4ipyocvh0zumkg&st=rq80zbrl&dl=0',
     highlights: [
       'Spacious travel trailer',
@@ -615,9 +586,7 @@ export const vehicles: Vehicle[] = [
     sellerContribution: 'Seller contributes $32,616 over time — reducing your monthly cost',
     city: 'Loomis',
     state: 'CA',
-    photos: [
-      'https://images.unsplash.com/photo-1563783850023-077d97825802?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-5', 15),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/b7ohrqnn2i7savv87vis9/AI0c3uWcULQFGzulkm1xtoE?rlkey=hhwqgw5h3wmmijddumnbag5mo&st=yxuw8zbl&dl=0',
     highlights: [
       'Spacious toy hauler',
@@ -647,9 +616,7 @@ export const vehicles: Vehicle[] = [
     sellerContribution: 'Seller pays $115/mo for you via cost-share',
     city: 'Sherrill',
     state: 'NY',
-    photos: [
-      'https://images.unsplash.com/photo-1596649299486-4cdea56fd59d?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-6', 14),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/uzsx0wk07lmv7v5gwa2tu/AOLfFmd36vw_2gga-P3wK-4?rlkey=javtxc7km0bghz5vemxx7pkmg&st=1o7kmllb&dl=0',
     highlights: [
       'Like-new 5th wheel — only ~100 miles',
@@ -678,9 +645,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Orange',
     state: 'CA',
-    photos: [
-      'https://images.unsplash.com/photo-1534187886935-1e1236e856c3?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-7', 16),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/if3v92lkzxa7z2oa4xdjk/AMYdXVRxl2EsC4w_bZ_0_JQ?rlkey=dj33e2t2jw1u6e9bdaz8v7qqk&st=h2v4p1km&dl=0',
     highlights: [
       'Spacious travel trailer',
@@ -709,9 +674,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Fort Bragg',
     state: 'CA',
-    photos: [
-      'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-8', 8),
     dropboxUrl: 'https://www.dropbox.com/scl/fo/pvt4l9w9hyesnbcxvay09/ABfAlwwdxdh-6S1N1oqGvFw?rlkey=lr81b8qu2vhylxfqqabnp3e3p&st=8pvxjctl&dl=0',
     highlights: [
       'Beautiful 5th wheel',
@@ -741,9 +704,7 @@ export const vehicles: Vehicle[] = [
     gap: false,
     city: 'Lubbock',
     state: 'TX',
-    photos: [
-      'https://images.unsplash.com/photo-1626084886210-bffc06fa7b4a?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('rv-9', 15),
     highlights: [
       'Luxury Class A diesel pusher',
       '50th Anniversary Edition — rare spec',
@@ -778,9 +739,7 @@ export const vehicles: Vehicle[] = [
     paymentNote: 'Year 1: $1,000/mo — then $25,000/year annually (due every March)',
     city: 'Lee County',
     state: 'GA',
-    photos: [
-      'https://images.unsplash.com/photo-1586771107445-b3e6e2643ee5?w=800&h=500&fit=crop',
-    ],
+    photos: localPhotos('equipment-1', 20),
     highlights: [
       'Tractor / Heavy Equipment',
       'Good condition — 5,500 hours',
