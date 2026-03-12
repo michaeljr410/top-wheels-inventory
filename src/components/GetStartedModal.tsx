@@ -30,7 +30,7 @@ interface GetStartedModalProps {
 
 type Step = 'agreements' | 'booking' | 'contact';
 
-const CALENDLY_URL = 'https://calendly.com/mikedavis/30min';
+const CALENDLY_URL = 'https://calendly.com/d/3kr-m8k-krk/top-wheels-buyer-consulting-call-w-mike-davis';
 
 export const GetStartedModal = ({ vehicle, isOpen, onClose }: GetStartedModalProps) => {
   const [step, setStep] = useState<Step>('agreements');
